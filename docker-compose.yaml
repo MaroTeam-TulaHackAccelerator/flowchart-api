@@ -1,0 +1,10 @@
+services:
+  db:
+    image: mongo
+    restart: always
+
+  api:
+    image: lsdrfrx/flowchart-api
+    restart: always
+    ports:
+      - 3000:3000
