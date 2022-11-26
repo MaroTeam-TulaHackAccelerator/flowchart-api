@@ -8,7 +8,7 @@ import {
 } from "@nestjs/websockets";
 
 import { Server, Socket } from 'socket.io';
-import { NewMessageDto } from 'src/dto/new-message.dto';
+import { INewMessageDto } from 'src/gateway/dto/new-message.dto';
 
 @WebSocketGateway()
 export class AppGateway implements OnModuleInit {
@@ -17,7 +17,7 @@ export class AppGateway implements OnModuleInit {
   private logger: Logger = new Logger('AppGateway');
 
   @SubscribeMessage('newMessage')
-  onNewMessage(@MessageBody() body: NewMessageDto) {
+  onNewMessage(@MessageBody() body: INewMessageDto) {
     this.logger.log(body);
     this.server.to(body.roomId).emit('onMessage', {
       message: "New Message",

@@ -1,4 +1,4 @@
-export class NodeDataModel{
+export interface INodeDataModel{
     key: number;
     loc: string;
     text: string;

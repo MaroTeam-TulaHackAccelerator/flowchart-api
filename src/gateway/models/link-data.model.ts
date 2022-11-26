@@ -1,4 +1,4 @@
-export class LinkDataModel{
+export interface ILinkDataModel{
     from: number;
     to: number;
     dash?: number[];
