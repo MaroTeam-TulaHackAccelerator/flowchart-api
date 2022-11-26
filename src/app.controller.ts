@@ -1,4 +1,4 @@
-import { Controller, Get, Headers } from '@nestjs/common';
+import { Controller, Get, Headers, Param } from '@nestjs/common';
 import { AppService } from './app.service';
 import { AuthWorker } from './auth/auth';
 
@@ -22,9 +22,15 @@ export class AppController {
       return null
     }
 
-    console.log(user)
-
     const projects = await this.appService.getUserProjects(user.userid);
-    console.log(projects)
+    return projects
+  }
+
+  @Get('/getmessages/:id')
+  async getRoomMessages(
+    @Headers('Authorization') data: string,
+    @Param('id') roomId: string,  
+  ) {
+    
   }
 }
