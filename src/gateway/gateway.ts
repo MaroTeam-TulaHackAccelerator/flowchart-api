@@ -7,6 +7,7 @@ import {
 } from "@nestjs/websockets";
 
 import { Server } from 'socket.io';
+import { IGoJSModel } from 'src/models/Igo-js.model';
 
 @WebSocketGateway()
 export class AppGateway implements OnModuleInit {
@@ -15,12 +16,12 @@ export class AppGateway implements OnModuleInit {
   private logger: Logger = new Logger('AppGateway');
 
   @SubscribeMessage('newMessage')
-  onNewMessage(@MessageBody() body: any) {
-    this.logger.log(body);
-    this.server.emit('onMessage', {
-      message: "New Message",
-      content: body,
-    })
+  onNewMessage(@MessageBody() body: IGoJSModel) {
+      this.logger.log(body);
+      this.server.emit('onMessage', {
+        message: "New Message",
+        content: body,
+      })
   }
 
   onModuleInit() {
