@@ -12,7 +12,7 @@ services:
       - ./mongo-volume:/data/db
     
     ports:
-      - 27017-27019:27017-27019
+      - 127.0.0.1:27017-27019:27017-27019
 
   api:
     image: flowchart-api
@@ -21,7 +21,7 @@ services:
       - DB_URI=mongodb://admin:admin@db:27017/flowchart-api-db
 
     ports:
-      - 3000:3000
+      - "127.0.0.1:3000:3000"
 
     links:
       - db
