@@ -6,33 +6,31 @@ import {
   MessageBody,
   ConnectedSocket,
 } from "@nestjs/websockets";
-import { ChatService } from './gateway.service';
+import { GatewayService } from './gateway.service';
 import { Server, Socket } from 'socket.io';
-import { NewMessageDto } from './dto/new-message.dto';
+import { NewStateDto } from '../gateway/dto/new-state.dto';
 import { ChatMessageDto } from './dto/newChatmessage.dto';
 import { NewRoomDto } from './dto/newRoom.dto';
 
 @WebSocketGateway()
 export class AppGateway implements OnModuleInit {
-  constructor(private readonly chatService: ChatService) {}
+  constructor(private readonly  gatewayService: GatewayService) {}
 
   @WebSocketServer()
   private server: Server;
   private logger: Logger = new Logger('AppGateway');
 
-  @SubscribeMessage('newMessage')
-  onNewMessage(@MessageBody() body: NewMessageDto) {
+  @SubscribeMessage('newState')
+  async onNewState(@MessageBody() body: NewStateDto) {
     this.logger.log(body);
-    this.server.to(body.roomId).emit('onMessage', {
-      message: "New Message",
-      content: body.model,
-    })
+    this.server.to(body.roomId).emit('onStateChanged', body);
+    await this.gatewayService.saveState(body);
   }
 
   @SubscribeMessage('newChatMessage')
   async onNewChatMessage(@MessageBody() message: ChatMessageDto) {
     this.server.to(message.roomId).emit('onChatMessage', message)
-    await this.chatService.saveMessage(message)
+    await this.gatewayService.saveMessage(message)
   }
   
   @SubscribeMessage('joinToRoom')
@@ -49,7 +47,7 @@ export class AppGateway implements OnModuleInit {
   async createRoom(@MessageBody() body: NewRoomDto, @ConnectedSocket() client: Socket){
     client.join(`${body.roomId}`);
     this.logger.log(`Client ${client.id}, created room: ${body.roomId}`);
-    await this.chatService.saveRoom(body);
+    await this.gatewayService.saveRoom(body);
     this.server.to(body.roomId).emit('onCreate', {
       message: `Client ${client.id}, created room: ${body.roomId}`,
     });
