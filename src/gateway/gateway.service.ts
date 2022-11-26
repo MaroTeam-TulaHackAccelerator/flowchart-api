@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { IGoJSModel } from 'src/models/Igo-js.model';
 import { NewStateDto } from './dto/new-state.dto';
 import { ChatMessageDto } from './dto/newChatmessage.dto';
 import { NewRoomDto } from './dto/newRoom.dto'
