@@ -1,8 +1,10 @@
 .SILENT:
 .PHONY: build run
 
+DEFAULT_GOAL: run
+
 build:
-	docker build -t flowchart-api .
+	docker build --no-cache=true -t flowchart-api .
 
 run: build
 	docker-compose up
