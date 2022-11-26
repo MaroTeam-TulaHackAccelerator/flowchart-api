@@ -1,4 +1,4 @@
-import { GoJsModel } from "src/models/go-Js.model";
+import { GoJsModel } from "src/gateway/models/go-Js.model";
 
 export class NewMessageDto {
     roomId: string;

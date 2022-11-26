@@ -11,7 +11,6 @@ export class AuthService {
   constructor(@InjectModel(User.name) private readonly model: Model<UserDocument>, private jwtService: JwtService) {}
 
   async createUser(login: string, email: string, password: string) {
-    console.log(login, password, email);
     const user = await this.model.create({
       login: login,
       email: email,
