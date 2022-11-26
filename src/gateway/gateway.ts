@@ -6,17 +6,11 @@ import {
   MessageBody,
   ConnectedSocket,
 } from "@nestjs/websockets";
-<<<<<<< HEAD
-
-import { Server } from 'socket.io';
-import { IGoJSModel } from 'src/models/Igo-js.model';
-=======
 import { ChatService } from './gateway.service';
 import { Server, Socket } from 'socket.io';
 import { NewMessageDto } from './dto/new-message.dto';
 import { ChatMessageDto } from './dto/newChatmessage.dto';
 import { NewRoomDto } from './dto/newRoom.dto';
->>>>>>> a4ccdbe35bdd4a6664b192228bb08d699579abc3
 
 @WebSocketGateway()
 export class AppGateway implements OnModuleInit {
@@ -27,21 +21,12 @@ export class AppGateway implements OnModuleInit {
   private logger: Logger = new Logger('AppGateway');
 
   @SubscribeMessage('newMessage')
-<<<<<<< HEAD
-  onNewMessage(@MessageBody() body: IGoJSModel) {
-      this.logger.log(body);
-      this.server.emit('onMessage', {
-        message: "New Message",
-        content: body,
-      })
-=======
   onNewMessage(@MessageBody() body: NewMessageDto) {
     this.logger.log(body);
     this.server.to(body.roomId).emit('onMessage', {
       message: "New Message",
       content: body.model,
     })
->>>>>>> a4ccdbe35bdd4a6664b192228bb08d699579abc3
   }
 
   @SubscribeMessage('newChatMessage')
