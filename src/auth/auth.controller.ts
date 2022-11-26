@@ -1,4 +1,4 @@
-import { Body, Controller, Logger, Post, Get, Headers } from '@nestjs/common';
+import { Body, Controller, Logger, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { UserDto, NewUserDto } from './dto/user.dto';
 
@@ -14,8 +14,7 @@ export class AuthController {
     if (!user) {
       return "no"
     }
-
-    return this.authService.generateToken(user);
+    return user;
   }
 
   @Post('/auth/signup')
@@ -30,25 +29,6 @@ export class AuthController {
     if (!user) {
       return 'no';
     }
-
-    return this.authService.generateToken(user);
-  }
-
-  @Get('/getprojects')
-  async getProjects(@Headers('Authorization') data: string) {
-    if (!data) {
-      return null
-    }
-    const token = data.split(' ')[1];
-
-    const user = this.authService.parseToken(token);
-    if (!user) {
-      return null
-    }
-
-    console.log(user)
-
-    const projects = await this.authService.getUserProjects(user.userid);
-    console.log(projects)
+    return user;
   }
 }

@@ -2,9 +2,9 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { NewStateDto } from './dto/new-state.dto';
-import { ChatMessageDto } from './dto/newChatmessage.dto';
-import { NewRoomDto } from './dto/newRoom.dto'
-import { Room, RoomDocument } from './schemas/room.schema'
+import { ChatMessageDto } from '../dto/newChatmessage.dto';
+import { NewRoomDto } from '../dto/newRoom.dto'
+import { Room, RoomDocument } from '../schemas/room.schema'
 
 @Injectable()
 export class GatewayService {
