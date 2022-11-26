@@ -1,6 +1,6 @@
-import { GoJsModel } from "src/gateway/models/go-Js.model";
+import { IGoJsModel } from "src/gateway/models/go-Js.model";
 
-export class NewMessageDto {
+export interface INewMessageDto {
     roomId: string;
-    model: GoJsModel;
+    model: IGoJsModel;
 }
