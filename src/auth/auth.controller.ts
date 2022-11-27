@@ -2,23 +2,22 @@ import { Body, Controller, Logger, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { UserDto, NewUserDto } from './dto/user.dto';
 
-@Controller('auth')
+@Controller('/')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   private logger: Logger = new Logger('AuthController');
 
-  @Post('/signin')
+  @Post('/auth/signin')
   async signIn(@Body() body: UserDto) {
     const user = await this.authService.validateUser(body.login, body.password);
     if (!user) {
       return "no"
     }
-
-    return this.authService.generateToken(user);
+    return user;
   }
 
-  @Post('/signup')
+  @Post('/auth/signup')
   signUp(@Body() body: NewUserDto) {
     console.log(body)
     const user = this.authService.createUser(
@@ -30,7 +29,6 @@ export class AuthController {
     if (!user) {
       return 'no';
     }
-
-    return this.authService.generateToken(user);
+    return user;
   }
 }

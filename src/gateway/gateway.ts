@@ -9,12 +9,12 @@ import {
 import { GatewayService } from './gateway.service';
 import { Server, Socket } from 'socket.io';
 import { NewStateDto } from '../gateway/dto/new-state.dto';
-import { ChatMessageDto } from './dto/newChatmessage.dto';
-import { NewRoomDto } from './dto/newRoom.dto';
+import { ChatMessageDto } from '../dto/newChatmessage.dto';
+import { NewRoomDto } from '../dto/newRoom.dto';
 
 @WebSocketGateway()
 export class AppGateway implements OnModuleInit {
-  constructor(private readonly  gatewayService: GatewayService) {}
+  constructor(private readonly gatewayService: GatewayService) {}
 
   @WebSocketServer()
   private server: Server;
