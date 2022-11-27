@@ -1,6 +1,6 @@
 services:
   db:
-    image: mongo
+    image: mongo:4.2.0
     restart: always
     environment:
       - MONGO_INITDB_DATABASE=flowchart-api-db
