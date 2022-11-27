@@ -13,4 +13,9 @@ export class AppService {
         const state = await this.stateModel.findOne({roomId: roomId});
         return state;
     }
+
+    async getUserProjects(userid: string) {
+      const projects = await this.roomModel.find({userId: userid})
+      return projects
+    }
 }

@@ -1,17 +1,3 @@
-<<<<<<< HEAD
-import { Controller, Get, Param, Query } from '@nestjs/common';
-import { AppService } from './app.service';
-
-@Controller()
-export class AppController {
-    constructor(private readonly appService: AppService){}
-
-    @Get("getWorkspace/:roomId")
-    async getWorkspace(@Param('roomId') roomId){
-        let room = await this.appService.getWorkspace(roomId);
-        return room;
-    }
-=======
 import { Controller, Get, Headers, Param } from '@nestjs/common';
 import { AppService } from './app.service';
 import { AuthWorker } from './auth/auth';
@@ -40,6 +26,12 @@ export class AppController {
     return projects
   }
 
+  @Get("getWorkspace/:roomId")
+  async getWorkspace(@Param('roomId') roomId){
+      let room = await this.appService.getWorkspace(roomId);
+      return room;
+  }
+
   @Get('/getmessages/:id')
   async getRoomMessages(
     @Headers('Authorization') data: string,
@@ -47,5 +39,4 @@ export class AppController {
   ) {
     
   }
->>>>>>> d821aab33920c43dcb12a6115186ac14d4849dbd
 }
