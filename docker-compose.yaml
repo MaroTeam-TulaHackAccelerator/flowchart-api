@@ -21,7 +21,7 @@ services:
       - DB_URI=mongodb://admin:admin@db:27017/flowchart-api-db
 
     ports:
-      - "127.0.0.1:3000:3000"
+      - "0.0.0.0:3000:3000"
 
     links:
       - db

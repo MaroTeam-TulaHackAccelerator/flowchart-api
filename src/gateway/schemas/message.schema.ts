@@ -4,7 +4,7 @@ import {
     SchemaFactory,
   } from '@nestjs/mongoose';
   import { Document } from 'mongoose';
-  import { ChatMessageDto } from '../dto/newChatmessage.dto';
+  import { ChatMessageDto } from '../../dto/newChatmessage.dto';
   
   export type MessageDocument = Message & Document;
   
