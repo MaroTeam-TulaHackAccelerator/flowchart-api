@@ -1,10 +1,15 @@
-import { Body, Controller, Post, Res, StreamableFile, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Post, StreamableFile, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
+<<<<<<< HEAD
+import { createReadStream, writeFile } from 'fs';
+import { GoJsModel } from 'src/gateway/models/go-Js.model';
+=======
 import { randomUUID } from 'crypto';
 import { Response } from 'express';
 import { createReadStream, createWriteStream, readFileSync, ReadStream, writeFile } from 'fs';
 import { GoJsModel } from '../gateway/models/go-Js.model';
 import { Stream } from 'stream';
+>>>>>>> d821aab33920c43dcb12a6115186ac14d4849dbd
 import { v4 as uuidv4 } from 'uuid';
 
 const dir = 'src/exports/';
