@@ -1,10 +1,7 @@
-import { Body, Controller, Post, Res, StreamableFile, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Post, StreamableFile, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { randomUUID } from 'crypto';
-import { Response } from 'express';
-import { createReadStream, createWriteStream, readFileSync, ReadStream, writeFile } from 'fs';
-import { IGoJsModel } from 'src/gateway/models/go-Js.model';
-import { Stream } from 'stream';
+import { createReadStream, writeFile } from 'fs';
+import { GoJsModel } from 'src/gateway/models/go-Js.model';
 import { v4 as uuidv4 } from 'uuid';
 
 const dir = 'src/exports/';
@@ -19,7 +16,7 @@ export class WorkspacesController {
     }
 
     @Post("file-export")
-    exportFile(@Body() data: IGoJsModel): StreamableFile{
+    exportFile(@Body() data: GoJsModel): StreamableFile{
         let json = JSON.stringify(data);
         let name = `${uuidv4()}.json`;
         let path = dir + name;

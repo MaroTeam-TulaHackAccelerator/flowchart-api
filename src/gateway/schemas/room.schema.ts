@@ -3,8 +3,7 @@ import {
   Schema,
   SchemaFactory,
 } from '@nestjs/mongoose';
-import { Document, Types } from 'mongoose';
-import { ChatMessageDto } from '../dto/newChatmessage.dto';
+import { Document } from 'mongoose';
 
 export type RoomDocument = Room & Document;
 
@@ -15,12 +14,6 @@ export class Room {
 
   @Prop({required: true})
   roomId: string
-
-  @Prop()
-  messages: Array<ChatMessageDto>
-
-  @Prop({type: Types.Array})
-  roomState: any
 }
 
 export const RoomSchema = SchemaFactory.createForClass(Room)
